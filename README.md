@@ -17,6 +17,6 @@ Here is what the Squircle MVP should be able to do:
 - Remember Editor State
 
 ## Repository Content
-`apps/animator` - The main App
-`apps/web` - The [squircle.ch](https://www.squircle.dev) website
-`packages/svelte-panels` - The standalone panelmanager, developed for squircle
+- `apps/animator` - The main App
+- `apps/web` - The [squircle.ch](https://www.squircle.dev) website
+- `packages/svelte-panels` - The standalone panelmanager, developed for squircle
