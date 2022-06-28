@@ -7,6 +7,9 @@
   /** @type {GridState} */
   export let grid;
 
+  /*
+   *    Insets are written top right bottom left 
+   */
   const insets = {
     "panel-1": writable("0% 50% 0% 0%"),
     "panel-2": writable("0% 0% 0% 50%"),
