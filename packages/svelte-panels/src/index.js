@@ -1,1 +1,2 @@
-export {default as HelloWorld} from './HelloWorld.svelte';
+export {default as Panel} from './Panel.svelte';
+export {default as PanelManager} from './PanelManager.svelte';
