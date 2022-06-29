@@ -2,35 +2,46 @@
   import { setContext } from "svelte";
   import { writable } from "svelte/store";
   import { INSET_CONTEXT } from "./stores";
-  /** @typedef {import("./types").GridState}*/
+  /**
+   * @typedef {import("./types").GridState}
+   * @typedef {import("./types").BoundingBox}
+   */
 
   /** @type {GridState} */
   export let grid;
 
-  /*
-   *    Insets are written top right bottom left 
-   */
+  // Insets are written top right bottom left
   const insets = {
     "panel-1": writable("0% 50% 0% 0%"),
     "panel-2": writable("0% 0% 0% 50%"),
   };
 
-  const panel1Writabel = insets["panel-1"];
-
-  function toggle(){
-    console.log("toggling...")
-    
-    if($panel1Writabel == "0% 50% 0% 0%"){
-        insets["panel-1"].set("0% 40% 0% 0%")
-        insets["panel-2"].set( "0% 0% 0% 40%")
-    }else {
-        insets["panel-1"].set("0% 50% 0% 0%")
-        insets["panel-2"].set("0% 0% 0% 50%")
+  /**
+   * Computes all insets derived from the grid
+   * @param {GridState} grid
+   * @param {BoundingBox} bb
+   * @returns {void}
+   */
+  function computeInsets(
+    grid,
+    bb = {
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
     }
-    
+  ) {
+    if (typeof grid.first == "string") {
+    } else {
+    }
+
+    if (typeof grid.second == "string") {
+    } else {
+    }
   }
 
-  setContext("test", toggle)
+  $: computeInsets(grid);
+
   setContext(INSET_CONTEXT, insets);
 </script>
 

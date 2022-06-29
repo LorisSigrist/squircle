@@ -1,16 +1,23 @@
 <script>
   import { Panel, PanelManager } from "svelte-panels";
   import Counter from "$lib/Counter.svelte";
-  import Toggle from "$lib/Toggle.svelte";
+
+  const grid = {
+    first: "panel-1",
+    second: "panel-2",
+    direction: "row",
+    splitPercentage: 50,
+  }
+
 </script>
 
 <main>
-  <PanelManager grid={{}}>
+  <PanelManager {grid}>
     <Panel name="panel-1">
       <div style="background-color:red;">
         <span>This Is Panel 1</span>
         <Counter />
-        <Toggle />
+        <button on:click={()=> grid.splitPercentage = Math.random() * 100}>Change Layout</button>
       </div>
     </Panel>
     <Panel name="panel-2">
