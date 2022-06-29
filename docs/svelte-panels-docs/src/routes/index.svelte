@@ -4,7 +4,12 @@
 
   const grid = {
     first: "panel-1",
-    second: "panel-2",
+    second: {
+      first: "panel-2",
+      second: "panel-3",
+      splitPercentage: 40,
+      direction: "column"
+    },
     direction: "row",
     splitPercentage: 50,
   }
@@ -23,6 +28,12 @@
     <Panel name="panel-2">
       <div style="background-color:hotpink;">
         <span>This Is Panel 2</span>
+        <Counter />
+      </div>
+    </Panel>
+    <Panel name="panel-3">
+      <div style="background-color:purple;">
+        <span>This Is Panel 3</span>
         <Counter />
       </div>
     </Panel>

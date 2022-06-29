@@ -2,18 +2,14 @@
   import { setContext } from "svelte";
   import { writable } from "svelte/store";
   import { INSET_CONTEXT } from "./stores";
-  /**
-   * @typedef {import("./types").GridState}
-   * @typedef {import("./types").BoundingBox}
-   */
+  import splitBoundingBox from './utils/boundingBox'
+
 
   /** @type {GridState} */
   export let grid;
 
   // Insets are written top right bottom left
   const insets = {
-    "panel-1": writable("0% 50% 0% 0%"),
-    "panel-2": writable("0% 0% 0% 50%"),
   };
 
   /**
@@ -31,12 +27,27 @@
       right: 0,
     }
   ) {
+
+    const [firstBB, secondBB] = splitBoundingBox(bb, grid.splitPercentage, grid.direction);
+
     if (typeof grid.first == "string") {
+      if(insets[grid.first]){
+        insets[grid.first].set(firstBB);
+      }else {
+        insets[grid.first] = writable(firstBB);
+      }
     } else {
+      computeInsets(grid.first, firstBB)
     }
 
     if (typeof grid.second == "string") {
+      if(insets[grid.second]){
+        insets[grid.second].set(secondBB);
+      }else {
+        insets[grid.second] = writable(secondBB);
+      }
     } else {
+      computeInsets(grid.second, secondBB)
     }
   }
 

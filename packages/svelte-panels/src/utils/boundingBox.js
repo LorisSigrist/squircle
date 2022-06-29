@@ -41,3 +41,12 @@ function splitBoundingBox(bb, splitPercentage, direction) {
   return [firstBB, secondBB];
 }
 export default splitBoundingBox;
+
+/**
+ * 
+ * @param {BoundingBox} bb 
+ * @returns {string}
+ */
+export function boundingBoxToInset(bb){
+  return `${bb.top}% ${bb.right}% ${bb.bottom}% ${bb.left}%`
+}
