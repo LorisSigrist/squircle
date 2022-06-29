@@ -15,6 +15,22 @@
     "panel-2": writable("0% 0% 0% 50%"),
   };
 
+  const panel1Writabel = insets["panel-1"];
+
+  function toggle(){
+    console.log("toggling...")
+    
+    if($panel1Writabel == "0% 50% 0% 0%"){
+        insets["panel-1"].set("0% 40% 0% 0%")
+        insets["panel-2"].set( "0% 0% 0% 40%")
+    }else {
+        insets["panel-1"].set("0% 50% 0% 0%")
+        insets["panel-2"].set("0% 0% 0% 50%")
+    }
+    
+  }
+
+  setContext("test", toggle)
   setContext(INSET_CONTEXT, insets);
 </script>
 
