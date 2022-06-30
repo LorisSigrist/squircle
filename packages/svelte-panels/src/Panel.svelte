@@ -11,9 +11,10 @@
   export let name;
 
   const boundingBoxes = getContext(BOUNDING_BOX_CONTEXT);
+  
   /**@type {Writable<BoundingBox>}*/
   $: bb = boundingBoxes[name];
-  $: inset = boundingBoxToInset($bb);
+  $: inset = bb ? boundingBoxToInset($bb) : undefined;
 </script>
 
 {#if inset !== undefined}
