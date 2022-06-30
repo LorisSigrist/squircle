@@ -1,1 +1,1 @@
-export const INSET_CONTEXT = {};
+export const BOUNDING_BOX_CONTEXT = {};

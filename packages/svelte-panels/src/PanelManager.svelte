@@ -1,16 +1,21 @@
 <script>
   import { setContext } from "svelte";
   import { writable } from "svelte/store";
-  import { INSET_CONTEXT } from "./stores";
-  import splitBoundingBox from './utils/boundingBox'
-
+  import { BOUNDING_BOX_CONTEXT } from "./stores";
+  import splitBoundingBox from "./utils/boundingBox";
+  /**
+   * @typedef {import("./types").BoundingBox}
+   * @typedef {import("./types").GridState}
+   * @typedef {import("svelte/store").Writable}
+   */
 
   /** @type {GridState} */
   export let grid;
 
-  // Insets are written top right bottom left
-  const insets = {
-  };
+  /**
+   * @type {Object<string, Writable<BoundingBox>>}
+   */
+  const boundingBoxes = {};
 
   /**
    * Computes all insets derived from the grid
@@ -18,7 +23,7 @@
    * @param {BoundingBox} bb
    * @returns {void}
    */
-  function computeInsets(
+  function computeBoundingBoxes(
     grid,
     bb = {
       top: 0,
@@ -27,33 +32,36 @@
       right: 0,
     }
   ) {
-
-    const [firstBB, secondBB] = splitBoundingBox(bb, grid.splitPercentage, grid.direction);
+    const [firstBB, secondBB] = splitBoundingBox(
+      bb,
+      grid.splitPercentage,
+      grid.direction
+    );
 
     if (typeof grid.first == "string") {
-      if(insets[grid.first]){
-        insets[grid.first].set(firstBB);
-      }else {
-        insets[grid.first] = writable(firstBB);
+      if (boundingBoxes[grid.first]) {
+        boundingBoxes[grid.first].set(firstBB);
+      } else {
+        boundingBoxes[grid.first] = writable(firstBB);
       }
     } else {
-      computeInsets(grid.first, firstBB)
+      computeBoundingBoxes(grid.first, firstBB);
     }
 
     if (typeof grid.second == "string") {
-      if(insets[grid.second]){
-        insets[grid.second].set(secondBB);
-      }else {
-        insets[grid.second] = writable(secondBB);
+      if (boundingBoxes[grid.second]) {
+        boundingBoxes[grid.second].set(secondBB);
+      } else {
+        boundingBoxes[grid.second] = writable(secondBB);
       }
     } else {
-      computeInsets(grid.second, secondBB)
+      computeBoundingBoxes(grid.second, secondBB);
     }
   }
 
-  $: computeInsets(grid);
+  $: computeBoundingBoxes(grid);
 
-  setContext(INSET_CONTEXT, insets);
+  setContext(BOUNDING_BOX_CONTEXT, boundingBoxes);
 </script>
 
 <div style="position: relative; width: 100%; height: 100%;">
