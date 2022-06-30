@@ -51,6 +51,7 @@
     <Panel name="timeline">
       <div style="background-color:yellow;">
         <span>Timeline</span>
+        <p>{JSON.stringify(grid)}</p>
       </div>
     </Panel>
   </PanelManager>
